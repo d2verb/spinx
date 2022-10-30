@@ -1,5 +1,6 @@
 {
   "tasks": {
-    "test": "deno test --allow-run --allow-read"
+    "test": "deno test --allow-run --allow-read",
+    "test-cov": "deno test --allow-run --allow-read --coverage=.coverage"
   }
 }

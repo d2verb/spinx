@@ -10,7 +10,17 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
-      - name: Test
-        run: deno task test
       - name: Lint
         run: deno lint
+      - name: Format check
+        run: deno fmt --check
+      - name: Type check
+        run: deno check $(find . -regex '.*\.\(js\|ts\|jsx\|tsx\|mjs\|mjsx\)' -printf '%p ')
+      - name: Test
+        run: deno task test-cov
+      - name: Create coverage report
+        run: deno coverage .coverage -lcov > coverage.lcov
+      - name: Upload coverage report to codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.lcov

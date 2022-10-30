@@ -9,7 +9,7 @@
 More examples can be found under [examples/](examples/)
 
 ```ts
-import { spin, Spinner } from "../mod.ts";
+import { spin, Spinner } from "https://deno.land/x/spinx@v0.0.2/mod.ts";
 
 const spinner = new Spinner({
   message: "Now Loading",

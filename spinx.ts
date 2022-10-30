@@ -1,3 +1,5 @@
+import { AsciiColor, decorate } from "./ascii.ts";
+
 type valueOf<T> = T[keyof T];
 
 export const SPINNER_PATTERNS = {
@@ -10,12 +12,16 @@ export type SpinnerOptions = {
   pattern: SpinnerPattern;
   ms: number;
   message: string;
+  spinnerColor: AsciiColor;
+  messageColor: AsciiColor;
 };
 
 export const DEFAULT_SPINNER_OPTIONS: SpinnerOptions = {
   pattern: SPINNER_PATTERNS.dots,
   ms: 80,
   message: "",
+  spinnerColor: AsciiColor.Cyan,
+  messageColor: AsciiColor.None,
 } as const;
 
 /**
@@ -44,8 +50,12 @@ export class Spinner {
       return;
     }
     this.intervalID = setInterval(() => {
-      const spinnerText = "\r" + this.options.pattern[this.patternPos] + " " +
-        this.options.message;
+      const spinnerText = "\r" +
+        decorate(
+          this.options.pattern[this.patternPos],
+          this.options.spinnerColor,
+        ) + " " +
+        decorate(this.options.message, this.options.messageColor);
       Deno.stdout.write(new TextEncoder().encode(spinnerText));
       this.patternPos = (this.patternPos + 1) % this.options.pattern.length;
     }, this.options.ms);
@@ -69,7 +79,7 @@ type AsyncFn<T> = (...args: any[]) => Promise<T>;
 
 /**
  * Spin the spinner while the callback function is executing.
- * 
+ *
  * @param cb promise and callback async function
  * @param spinner spinner class instance
  * @returns new promise that stops spinner when it fulfilled

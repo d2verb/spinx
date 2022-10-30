@@ -1,7 +1,7 @@
 import { assertEquals } from "https://deno.land/std@0.161.0/testing/asserts.ts";
 
 Deno.test({
-  name: "All exmplaes works",
+  name: "All exmplaes exit with 0",
   fn: async () => {
     for await (const entry of Deno.readDir("./examples")) {
       if (entry.isDirectory) continue;
@@ -9,7 +9,7 @@ Deno.test({
       const path = `./examples/${entry.name}`;
       const p = Deno.run({
         cmd: ["deno", "run", "--allow-run", path],
-        stdout: "piped"
+        stdout: "piped",
       });
 
       const { code } = await p.status();

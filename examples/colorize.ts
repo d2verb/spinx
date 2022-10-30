@@ -1,4 +1,4 @@
-import { spin, Spinner, AsciiColor } from "../mod.ts";
+import { AsciiColor, spin, Spinner } from "../mod.ts";
 
 if (import.meta.main) {
   const spinner = new Spinner({

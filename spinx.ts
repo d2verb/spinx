@@ -4,6 +4,7 @@ type valueOf<T> = T[keyof T];
 
 export const SPINNER_PATTERNS = {
   dots: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"],
+  arrows: ["←", "↖", "↑", "↗", "→", "↘", "↓", "↙"],
 } as const;
 
 export type SpinnerPattern = valueOf<typeof SPINNER_PATTERNS>;

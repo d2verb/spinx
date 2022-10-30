@@ -1,4 +1,7 @@
-import { assertEquals, assert } from "https://deno.land/std@0.161.0/testing/asserts.ts";
+import {
+  assert,
+  assertEquals,
+} from "https://deno.land/std@0.161.0/testing/asserts.ts";
 import { FakeTime } from "https://deno.land/std@0.161.0/testing/time.ts";
 import { Buffer } from "https://deno.land/std/io/buffer.ts";
 import { Spinner, SPINNER_PATTERNS } from "./spinx.ts";

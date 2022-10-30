@@ -32,12 +32,15 @@ export class Spinner {
   private options: SpinnerOptions;
   private intervalID?: number;
   private patternPos = 0;
-  private writer: Deno.Writer
+  private writer: Deno.Writer;
 
   /**
    * Spinner constructor
    */
-  constructor(options?: Partial<SpinnerOptions>, writer: Deno.Writer = Deno.stdout) {
+  constructor(
+    options?: Partial<SpinnerOptions>,
+    writer: Deno.Writer = Deno.stdout,
+  ) {
     this.options = {
       ...DEFAULT_SPINNER_OPTIONS,
       ...options,

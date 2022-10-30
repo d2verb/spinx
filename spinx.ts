@@ -32,15 +32,17 @@ export class Spinner {
   private options: SpinnerOptions;
   private intervalID?: number;
   private patternPos = 0;
+  private writer: Deno.Writer
 
   /**
    * Spinner constructor
    */
-  constructor(options?: Partial<SpinnerOptions>) {
+  constructor(options?: Partial<SpinnerOptions>, writer: Deno.Writer = Deno.stdout) {
     this.options = {
       ...DEFAULT_SPINNER_OPTIONS,
       ...options,
     };
+    this.writer = writer;
   }
 
   /**
@@ -57,7 +59,7 @@ export class Spinner {
           this.options.spinnerColor,
         ) + " " +
         decorate(this.options.message, this.options.messageColor);
-      Deno.stdout.write(new TextEncoder().encode(spinnerText));
+      this.writer.write(new TextEncoder().encode(spinnerText));
       this.patternPos = (this.patternPos + 1) % this.options.pattern.length;
     }, this.options.ms);
   }

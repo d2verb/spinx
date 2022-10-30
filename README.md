@@ -26,4 +26,4 @@ await spin(async () => {
 ```
 
 ## LICENSE
-MIT
+[MIT](./LICENSE)
